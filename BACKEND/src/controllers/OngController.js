@@ -1,6 +1,5 @@
-const crypto = require('crypto');
 const connection = require('../database/connection'); //CONEXÃO COM O BANCO DE DADOS.
-
+const generateUniqueId = require('../utils/generateUniqueId');
 //AQUI FICARÃO TODAS AS LÓGICAS DAS ROUTES RELACIONADAS AS ONGS.
 
 module.exports = {
@@ -14,7 +13,7 @@ module.exports = {
   async create(request, response) {
     const { name, email, whatsapp, city, uf } = request.body;
     
-    const id = crypto.randomBytes(4).toString('HEX');
+    const id = generateUniqueId();
   
     await connection('ongs').insert({
       id,
